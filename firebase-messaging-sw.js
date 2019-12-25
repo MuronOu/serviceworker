@@ -2,7 +2,7 @@ importScripts('https://www.gstatic.com/firebasejs/3.7.2/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/3.7.2/firebase-messaging.js');
 
 firebase.initializeApp({
-  messagingSenderId: '448358493027'
+  messagingSenderId: '395516353736'
 });
 
 const messaging = firebase.messaging();
@@ -12,13 +12,13 @@ messaging.setBackgroundMessageHandler(function(payload) {
   console.log('Handling background message', payload);
 
   // Copy data object to get parameters in the click handler
-  payload.data.data = JSON.parse(JSON.stringify(payload.data));
+  payload.notification = JSON.parse(JSON.stringify(payload.notification));
 
-  return self.registration.showNotification(payload.data.title, payload.data);
+  return self.registration.showNotification(payload.notification.title, payload.notification);
 });
 
 self.addEventListener('notificationclick', function(event) {
-  const target = event.notification.data.click_action || '/';
+  const target = event.notification.notification.click_action || '/';
   event.notification.close();
 
   // This looks to see if the current is already open and focuses if it is
