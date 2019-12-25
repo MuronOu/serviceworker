@@ -92,8 +92,8 @@ if (
         info.show();
         info_message
             .text('')
-            .append('<strong>'+payload.data.title+'</strong>')
-            .append('<em>'+payload.data.body+'</em>')
+            .append('<strong>'+payload.notification.title+'</strong>')
+            .append('<em>'+payload.notification.body+'</em>')
         ;
 
         // register fake ServiceWorker for show notification on mobile devices
@@ -104,7 +104,7 @@ if (
                   // Copy data object to get parameters in the click handler
                   payload.data.data = JSON.parse(JSON.stringify(payload.data));
 
-                  registration.showNotification(payload.data.title, payload.data);
+                  registration.showNotification(payload.notification.title, payload.notification);
                 }).catch(function(error) {
                     // registration failed :(
                     showError('ServiceWorker registration failed', error);
