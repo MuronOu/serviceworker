@@ -102,7 +102,7 @@ if (
             if (permission === 'granted') {
                 navigator.serviceWorker.ready.then(function(registration) {
                   // Copy data object to get parameters in the click handler
-                  payload.data.data = JSON.parse(JSON.stringify(payload.data));
+                  payload.notification = JSON.parse(JSON.stringify(payload.notification));
 
                   registration.showNotification(payload.notification.title, payload.notification);
                 }).catch(function(error) {
