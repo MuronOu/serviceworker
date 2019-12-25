@@ -92,8 +92,8 @@ if (
         info.show();
         info_message
             .text('')
-            .append('<strong>'+payload.notification.title+'</strong>')
-            .append('<em>'+payload.notification.body+'</em>')
+            .append('<strong>'+payload.data.title+'</strong>')
+            .append('<em>'+payload.data.body+'</em>')
         ;
 
         // register fake ServiceWorker for show notification on mobile devices
@@ -102,9 +102,9 @@ if (
             if (permission === 'granted') {
                 navigator.serviceWorker.ready.then(function(registration) {
                   // Copy data object to get parameters in the click handler
-                  payload.notification = JSON.parse(JSON.stringify(payload.notification));
+                  payload.data.data = JSON.parse(JSON.stringify(payload.data));
 
-                  registration.showNotification(payload.notification.title, payload.notification);
+                  registration.showNotification(payload.data.title, payload.data);
                 }).catch(function(error) {
                     // registration failed :(
                     showError('ServiceWorker registration failed', error);

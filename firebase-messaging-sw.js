@@ -12,13 +12,13 @@ messaging.setBackgroundMessageHandler(function(payload) {
   console.log('Handling background message', payload);
 
   // Copy data object to get parameters in the click handler
-  payload.notification = JSON.parse(JSON.stringify(payload.notification));
+  payload.data.data = JSON.parse(JSON.stringify(payload.data));
 
-  return self.registration.showNotification(payload.notification.title, payload.notification);
+  return self.registration.showNotification(payload.data.title, payload.data);
 });
 
 self.addEventListener('notificationclick', function(event) {
-  const target = event.notification.notification.click_action || '/';
+  const target = event.notification.data.click_action || '/';
   event.notification.close();
 
   // This looks to see if the current is already open and focuses if it is
